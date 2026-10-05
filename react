@@ -1,0 +1,184 @@
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+} from 'react-native';
+
+export default function App() {
+  const [inputText, setInputText] = useState('');
+  const [todos, setTodos] = useState([]);
+
+  // Add new task
+  const addTodo = () => {
+    const text = inputText.trim();
+    if (!text) return;
+
+    setTodos([
+      ...todos,
+      {
+        id: String(Date.now()),
+        text: text,
+        completed: false,
+      }
+    ]);
+    setInputText('');
+  };
+
+  // Mark as complete / incomplete
+  const toggleComplete = (id) => {
+    setTodos(
+      todos.map(item =>
+        item.id === id
+          ? { ...item, completed: !item.completed }
+          : item
+      )
+    );
+  };
+
+  // Delete a task
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(item => item.id !== id));
+  };
+
+  // Render each task row
+  const renderItem = ({ item }) => (
+    <View style={styles.row}>
+      <TouchableOpacity
+        style={styles.taskTouch}
+        onPress={() => toggleComplete(item.id)}
+      >
+        <Text style={[
+          styles.taskText,
+          item.completed && styles.taskCompleted
+        ]}>
+          {item.completed ? '✓ ' : '○ '}{item.text}
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.deleteButton}
+        onPress={() => deleteTodo(item.id)}
+      >
+        <Text style={styles.deleteText}>Delete</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>My To-Do List</Text>
+
+      {/* Input Area */}
+      <View style={styles.inputRow}>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter a new task..."
+          value={inputText}
+          onChangeText={setInputText}
+        />
+        <TouchableOpacity style={styles.addButton} onPress={addTodo}>
+          <Text style={styles.addText}>Add</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Task List */}
+      <FlatList
+        style={styles.list}
+        data={todos}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
+
+      {todos.length === 0 && (
+        <Text style={styles.emptyMessage}>No tasks yet. Add one above!</Text>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 60,
+    paddingHorizontal: 20,
+    backgroundColor: '#f5f7fa',
+  },
+  header: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 24,
+    color: '#333',
+  },
+  inputRow: {
+    flexDirection: 'row',
+    marginBottom: 20,
+    gap: 10,
+  },
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 12,
+    backgroundColor: '#fff',
+    fontSize: 16,
+  },
+  addButton: {
+    backgroundColor: '#2196F3',
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    justifyContent: 'center',
+  },
+  addText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  list: {
+    flex: 1,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 10,
+    borderColor: '#eee',
+    borderWidth: 1,
+  },
+  taskTouch: {
+    flex: 1,
+  },
+  taskText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  taskCompleted: {
+    textDecorationLine: 'line-through',
+    color: '#999999',
+  },
+  deleteButton: {
+    backgroundColor: '#ffcccc',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
+  },
+  deleteText: {
+    color: '#cc0000',
+    fontWeight: '600',
+  },
+  emptyMessage: {
+    textAlign: 'center',
+    color: '#999',
+    fontSize: 16,
+    marginTop: 40,
+  },
+});
