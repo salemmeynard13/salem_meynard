@@ -1,0 +1,117 @@
+// variables
+let shopName = "Meynard's Motor Shop";
+let location = "BRGY.PILAR";
+let isOpen = true;
+
+// arrays
+let motorcycles = ["Honda", "Yamaha", "Suzuki"];
+let customers = ["NONOY", "JOMOMG", "KANGKANG"];
+let services = ["Repair", "Maintenance", "Customization"];
+
+// 4 Classes (with 2 constructors, inheritance, encapsulation, abstraction, polymorphism)
+class Vehicle {
+    constructor(brand, model) { //  Constructor 1
+        this._brand = brand;   //  Encapsulation (underscore convention)
+        this._model = model;
+    }
+
+    // Method 1
+    getDetails() {
+        return `${this._brand} ${this._model}`;
+    }
+}
+
+class Motorcycle extends Vehicle { //  Inheritance 1
+    constructor(brand, model, type) { //  Constructor 2
+        super(brand, model);
+        this._type = type;
+    }
+
+    //  Method 2 (Polymorphism: overriding getDetails)
+    getDetails() {
+        return `${this._brand} ${this._model} (${this._type})`;
+    }
+}
+
+class Employee {
+    constructor(name, role) {
+        this._name = name; //  Encapsulation
+        this._role = role;
+    }
+
+    //  Method 3
+    work() {
+        return `${this._name} is working as ${this._role}.`;
+    }
+}
+
+class AbstractService {
+    performService() {
+        throw new Error("This method must be implemented by subclass"); //  Abstraction
+    }
+}
+
+class RepairService extends AbstractService {
+    //  Method 4
+    performService() {
+        return "Repair service performed.";
+    }
+}
+
+class MaintenanceService extends AbstractService {
+    //  Method 5
+    performService() {
+        return "Maintenance service performed.";
+    }
+}
+
+//  2 Object Literals
+let shopInfo = {
+    name: shopName,
+    location: location,
+    openStatus: isOpen
+};
+
+let spareParts = {
+    tires: 50,
+    engines: 10,
+    helmets: 30
+};
+
+//  3 Conditionals
+if (isOpen) {
+    console.log(`${shopName} is open for business.`);
+} else {
+    console.log(`${shopName} is closed.`);
+}
+
+if (motorcycles.includes("Honda")) {
+    console.log("Honda motorcycles are available.");
+}
+
+if (customers.length > 2) {
+    console.log("We have multiple customers today.");
+}
+
+//  3 Loops
+for (let i = 0; i < motorcycles.length; i++) {
+    console.log("Motorcycle:", motorcycles[i]);
+}
+
+for (let customer of customers) {
+    console.log("Customer:", customer);
+}
+
+services.forEach(service => console.log("Service:", service));
+
+// 4 Objects created from classes
+let bike1 = new Motorcycle("Honda", "CBR500R", "Sport");
+let bike2 = new Motorcycle("Yamaha", "MT-15", "Street");
+let employee1 = new Employee("Meynard ", "Mechanic");
+let repair = new RepairService();
+
+//  Demonstrating Methods and Polymorphism
+console.log(bike1.getDetails()); // Polymorphism in action
+console.log(bike2.getDetails());
+console.log(employee1.work());
+console.log(repair.performService());
