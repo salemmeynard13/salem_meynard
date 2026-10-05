@@ -1,0 +1,141 @@
+let clientName = "KINGKONG";
+let age = 34;
+let serviceType = "Business Haircut";
+let stylist = "KEVIN";
+let appointmentDate = "2026-09-20";
+let appointmentTime = "10:30 AM";
+let salonLocation = "BRGY.PILAR";
+let hairLength = "Short";
+let addShampoo = true;
+let loyaltyPoints = 120;
+
+const SALON_NAME = "Executive Cuts ";
+const BUSINESS_RATE = 350;
+const DISCOUNT_RATE = 0.10;
+const SENIOR_AGE = 60;
+const OPENING_HOUR = 9;
+const CLOSING_HOUR = 19;
+const SERVICES = ["Business Cut", "Style Trim", "Beard Grooming", "Hair Wash"];
+const PRICES = [350, 280, 150, 100];
+const STYLISTS = ["David", "Mark", "John", "Alex"];
+const CONTACT_NUMBER = "0917-123-4567";
+
+console.log(`Client: ${clientName}`);
+console.log(`Service: ${serviceType}`);
+console.log(`Stylist: ${stylist}`);
+console.log(`Date: ${appointmentDate}`);
+console.log(`Time: ${appointmentTime}`);
+console.log(`Location: ${salonLocation}`);
+console.log(`Hair Length: ${hairLength}`);
+console.log(`Shampoo Add-on: ${addShampoo ? "Yes" : "No"}`);
+console.log(`Loyalty Points: ${loyaltyPoints}`);
+console.log(`Status: Confirmed`);
+
+const greetClient = () => `Welcome to ${SALON_NAME}, ${clientName}!`;
+const calculateTotal = (price, addOn) => price + (addOn ? 80 : 0);
+const applyDiscount = (amount, rate) => amount * (1 - rate);
+const getServiceTime = (type) => type === "Business Haircut" ? "45 mins" : "30 mins";
+const checkAvailability = (hour) => hour >= OPENING_HOUR && hour < CLOSING_HOUR ? "Available" : "Closed";
+
+console.log(greetClient());
+console.log(`Base Price: ₱${BUSINESS_RATE}`);
+console.log(`Total: ₱${calculateTotal(BUSINESS_RATE, addShampoo)}`);
+console.log(`With Discount: ₱${applyDiscount(calculateTotal(BUSINESS_RATE, addShampoo), DISCOUNT_RATE)}`);
+console.log(`Estimated Time: ${getServiceTime(serviceType)}`);
+console.log(`Status: ${checkAvailability(10)}`);
+
+const [service1, service2] = SERVICES;
+const [price1, price2] = PRICES;
+const [stylist1, stylist2] = STYLISTS;
+
+console.log(`Service 1: ${service1}`);
+console.log(`Service 2: ${service2}`);
+console.log(`Price 1: ₱${price1}`);
+console.log(`Price 2: ₱${price2}`);
+console.log(`Top Stylists: ${stylist1}, ${stylist2}`);
+
+const clientProfile = {
+    name: "KINGKONG",
+    age: 34,
+    preference: "Sharp & Clean"
+};
+
+const booking = {
+    date: "2026-09-20",
+    time: "10:30 AM",
+    service: "Business Haircut"
+};
+
+const { name: clientFullName } = clientProfile;
+const { preference: cutStyle } = clientProfile;
+const { date: bookDate, time: bookTime } = booking;
+
+console.log(`Client Name: ${clientFullName}`);
+console.log(`Cut Style: ${cutStyle}`);
+console.log(`Booking Date: ${bookDate}`);
+console.log(`Booking Time: ${bookTime}`);
+
+const premiumServices = ["Hot Towel", "Scalp Massage"];
+const allAddOns = [...premiumServices, "Hair Wash", "Conditioning"];
+const fullServiceList = [...SERVICES, ...premiumServices];
+
+console.log(`All Add-ons: ${allAddOns}`);
+console.log(`Full Menu: ${fullServiceList}`);
+
+const personalDetails = {
+    name: "KINGKONG",
+    phone: "0917-123-4567"
+};
+
+const serviceDetails = {
+    service: "Business Haircut",
+    stylist: "KEVIN"
+};
+
+const basicBooking = {
+    ...personalDetails,
+    ...serviceDetails
+};
+
+const fullBooking = {
+    ...basicBooking,
+    date: "2026-09-20",
+    time: "10:30 AM",
+    location: "PILAR Branch"
+};
+
+console.log(basicBooking);
+console.log(fullBooking);
+
+const priceWithTax = PRICES.map((p) => Math.round(p * 1.12));
+const serviceLabels = SERVICES.map((s, i) => `${s} - ₱${PRICES[i]}`);
+
+console.log(`Prices with Tax: ${priceWithTax}`);
+console.log(`Service List: ${serviceLabels}`);
+
+const expensiveServices = PRICES.filter((p) => p > 200);
+const affordableServices = PRICES.filter((p) => p <= 200);
+
+console.log(`Premium Services: ${expensiveServices}`);
+console.log(`Budget Options: ${affordableServices}`);
+
+const appointmentData = {
+    service: "Business Haircut",
+    stylist: {
+        name: "KEVIN",
+        rating: 4.9
+    }
+};
+
+const branchData = {
+    name: "Executive Cuts ",
+    contact: {
+        number: "0917-123-4567"
+    }
+};
+
+const stylistRating = appointmentData.stylist?.rating;
+const branchNumber = branchData.contact?.number;
+
+console.log(`Stylist Rating: ${stylistRating}`);
+console.log(`Branch Contact: ${branchNumber}`);
