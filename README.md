@@ -1,2 +1,1 @@
-# salem_meynard
-salem
+console.log("Hello !");
