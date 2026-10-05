@@ -1,0 +1,55 @@
+// 3 VARIABLES
+let targetScore = 80;
+let total = 0;
+let average = 0;
+
+// 3 ARRAYS
+let scores = [75, 82, 91, 68, 88];
+let names = ["Ben", "Joy", "Sam", "Ana", "Tom"];
+let results = [];
+
+// 1st LOOP — calculate total
+for (let i = 0; i < scores.length; i++) {
+  total += scores[i];
+}
+average = total / scores.length;
+
+// 2nd LOOP — check each student
+let j = 0;
+while (j < names.length) {
+  let status;
+  // 1st CONDITIONAL
+  if (scores[j] >= targetScore) {
+    status = "Pass";
+  } else {
+    status = "Fail";
+  }
+  results.push(names[j] + " - " + status);
+  j++;
+}
+
+// 3rd LOOP — performance level
+for (let score of scores) {
+  let level;
+  // 2nd CONDITIONAL
+  if (score >= 90) {
+    level = "High";
+  } else if (score >= 75) {
+    level = "Medium";
+  } else {
+    level = "Low";
+  }
+  console.log(score + " = " + level);
+}
+
+// 3rd CONDITIONAL — class result
+if (average >= 85) {
+  console.log("Great class");
+} else if (average >= 75) {
+  console.log("Good class");
+} else {
+  console.log("Needs work");
+}
+
+console.log(results);
+console.log("Average:", average);
